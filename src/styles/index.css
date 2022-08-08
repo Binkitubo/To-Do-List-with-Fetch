@@ -1,12 +1,82 @@
+.glow {
+    color: #fff;
+    -webkit-animation: glow 1s ease-in-out infinite alternate;
+    -moz-animation: glow 1s ease-in-out infinite alternate;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+  
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+}
 
-/* 
+body {
+    background-image: url("https://i.imgur.com/VvZhjgp.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.title {
+    margin: 30px auto auto auto;
+    text-align: center;
+}
 
-*/
+.list {
+    margin: 150px;
+    font-size: 30px;
+    text-align: center;
+}
+
+ul {
+    margin-top: 20px;
+    list-style: none;
+    font-size: 40px;
+}
+
+.delete {
+  opacity: 50%;
+  color: white;
+}
+
+.delete:hover {
+    font-size: 40px;
+    color: white;
+    opacity: 100%;
+}
+
+li button {
+    background-color: transparent;
+    border: 0;
+    margin-left: 50px;
+}
+
+.btn, .btn:active {
+    margin-left: 5px;
+    height: 55px;
+    font-size: 30px;
+    color: white;
+}
+
+.btn:hover {
+    color: white;
+    box-shadow: 5px 5px 10px white;
+}
+
+.input-field {
+  background: transparent;
+  border: white 5px solid;
+  border-radius: 15px;
+  padding-left: 10px;
+}
+
+.input-field:focus, .input-field:enabled {
+    color: white;
+    }
+
+::placeholder {
+    color: white;
+}
