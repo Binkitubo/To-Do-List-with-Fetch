@@ -1,4 +1,4 @@
-# To-Do List with React
+# To-Do List with React and Fetch
 <img src="./src/img/thumbnail.png" />
 
 ## FAQ
