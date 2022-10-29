@@ -1,66 +1,124 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { TiDelete } from 'react-icons/ti';
+import { BiSad } from 'react-icons/bi';
 
-const ToDoList = () => {
-
+const ToDoListFetch = () => {
 	const [task, setTask] = useState("");
 	const [taskList, setTaskList] = useState([]);
 
-	const handleChange = (e) => {
-		setTask(e.target.value);
-	};
-
-	const AddTask = () => {
-		if (task !== "") {
-			const taskDetails = {
-				id: Math.floor(Math.random() * 1000),
-				value: task,
-				isCompleted: false,
-			};
-
-			setTaskList([...taskList, taskDetails]);
+	useEffect(() => {
+		const getTasks = async () => {
+			try {
+				await fetch(
+					"https://assets.breatheco.de/apis/fake/todos/user/KarlyMakowski"
+				)
+					.then((resp) => resp.json())
+					.then((data) => setTaskList(data));
+			} catch (error) {
+				console.log(error);
+			}
 		};
+		getTasks();
+	}, []);
+
+	const list = async (newList) => {
+		try {
+			await fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/KarlyMakowski",
+				{
+					method: "PUT",
+					body: JSON.stringify(newList),
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
-	const deleteTask = (e, id) => {
-		e.preventDefault();
-		setTaskList(taskList.filter((t) => t.id != id));
-	}
+	const deleteAllTasks = () => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/KarlyMakowski", {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		}).then(() => {
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/KarlyMakowski", {
+				method: "POST",
+				body: JSON.stringify([]),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then((resp) => resp.json())
+				.then((data) => {
+					if (data.result === "ok") {
+						setTaskList([]);
+					}
+				});
+		});
+	};
 
-	return (<>
-		<div className="title glow">
-			<h1>To Do List</h1>
-		</div>
+	const handleChange = (event) => {
+		setTask(event.target.value);
+	};
 
-		<div className="list glow">
-			<div>
+	const addTask = (event) => {
+		if (event.key === "Enter" && event.target.value !== "") {
+			let newList = { label: event.target.value, done: false };
+			setTaskList(
+				taskList.concat({ label: `${event.target.value}`, done: false }),
+				list([...taskList, newList])
+			);
+			event.target.value = "";
+		}
+	};
+
+	const deleteTask = (indexDelete) => {
+		setTaskList(taskList.filter((t, index) => index !== indexDelete));
+	};
+
+	return (
+		<div className="to-do-container">
+			<h1 className="glow">To Do List</h1>
 			<input
-				className="input-field"
 				type="text"
 				name="text"
 				id="text"
 				placeholder="Add task here..."
-				onChange={(e) => handleChange(e)}
+				onChange={handleChange}
+				value={task}
+				onKeyDown={addTask}
+				autoComplete="off"
+				className="input-field"
 			/>
 
-			<button onClick={AddTask} className="btn">Add</button>
-			</div>
-
 			{taskList !== [] ? (
-				<ul className="glow">
-					{taskList.map((t) => (
-						<li>
-							{t.value}
-							<button className="delete" onClick={(e) => deleteTask(e, t.id)}>
-								X
-							</button>
-						</li>
-					))}
+				<ul className="glow list">
+					{taskList.length === 0 && (
+						<p>You have no tasks <BiSad /></p>
+					)}
+					{taskList.map((t, i) => {
+						return (
+							<li key={i} className="d-flex justify-content-between">
+								<p>{t.label}</p>
+								<span onClick={() => deleteTask(i)}>
+									<TiDelete className="delete" />
+								</span>
+							</li>
+						);
+					})}
 				</ul>
 			) : null}
+
+			<button type="button" className="deleteAll" onClick={deleteAllTasks}>
+				Delete All Tasks
+			</button>
 		</div>
-	</>
 	);
 };
 
-export default ToDoList;
+export default ToDoListFetch;

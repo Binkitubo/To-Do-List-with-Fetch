@@ -1,82 +1,118 @@
-.glow {
-    color: #fff;
-    -webkit-animation: glow 1s ease-in-out infinite alternate;
-    -moz-animation: glow 1s ease-in-out infinite alternate;
-    animation: glow 1s ease-in-out infinite alternate;
-}
-  
-@-webkit-keyframes glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-image: url("https://i.imgur.com/VvZhjgp.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url("https://i.imgur.com/VvZhjgp.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.title {
-    margin: 30px auto auto auto;
-    text-align: center;
+.glow {
+  color: #fff;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow:
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #e60073,
+    0 0 40px #e60073,
+    0 0 50px #e60073,
+    0 0 60px #e60073,
+    0 0 70px #e60073;
+  }
+  to {
+    text-shadow:
+    0 0 10px #fff,
+    0 0 20px #fff,
+    0 0 30px #ff4da6,
+    0 0 40px #ff4da6,
+    0 0 50px #ff4da6,
+    0 0 60px #ff4da6,
+    0 0 70px #ff4da6,
+    0 0 80px #ff4da6;
+  }
+}
+
+.to-do-container {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.input-field {
+  width: 30%;
+  margin-top: 10rem;
+  font-size: 2rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(3px);
+  border: 5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  color: #fff;
+  padding: 5px 1rem;
+  transition: width 0.5s;
+}
+
+.input-field:focus {
+  width: 40%;
+  border: 5px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px #fff;
+}
+
+.input-field:hover {
+  border: 5px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 0 20px #fff;
+}
+
+.input-field::placeholder {
+  color: #fff;
 }
 
 .list {
-    margin: 150px;
-    font-size: 30px;
-    text-align: center;
-}
-
-ul {
-    margin-top: 20px;
-    list-style: none;
-    font-size: 40px;
+  width: 580px;
+  margin: 2.5rem auto;
+  gap: 1rem;
+  font-size: 2rem;
 }
 
 .delete {
   opacity: 50%;
+  margin-right: 1rem;
   color: white;
+  cursor: pointer;
+  font-size: 2rem;
+  transform: rotate(0deg);
+  transition: font-size 0.2s, transform 0.2s;
 }
 
 .delete:hover {
-    font-size: 40px;
-    color: white;
     opacity: 100%;
+    font-size: 3rem;
+    transform: rotate(90deg);
 }
 
-li button {
-    background-color: transparent;
-    border: 0;
-    margin-left: 50px;
+.delete svg {
+  cursor: pointer;
 }
 
-.btn, .btn:active {
-    margin-left: 5px;
-    height: 55px;
-    font-size: 30px;
-    color: white;
+.deleteAll {
+  padding: 0.7rem 1.5rem;
+  font-size: 1.5rem;
+  border: 5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 30px;
+  background-color: rgba(255, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  color: #fff;
+  font-weight: 500;
 }
 
-.btn:hover {
-    color: white;
-    box-shadow: 5px 5px 10px white;
-}
-
-.input-field {
-  background: transparent;
-  border: white 5px solid;
-  border-radius: 15px;
-  padding-left: 10px;
-}
-
-.input-field:focus, .input-field:enabled {
-    color: white;
-    }
-
-::placeholder {
-    color: white;
+.deleteAll:hover {
+  border: 5px solid rgba(255, 0, 0, 1);
+  box-shadow: 0 0 20px red;
 }
